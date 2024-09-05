@@ -9,6 +9,7 @@ public class Car {
     private double fuelSize;
     private double currFuel;
 
+    Engine engine = new Engine();
     public Car() {
         Random rand = new Random();
         this.serial = rand.nextInt(10000)+1;
@@ -37,7 +38,16 @@ public class Car {
                 ", color='" + color + '\'' +
                 ", fuelSize=" + fuelSize +
                 ", currFuel=" + currFuel +
+                ", engine=" + engine +
                 '}';
+    }
+
+    public Engine getEngine() {
+        return engine;
+    }
+
+    public void setEngine(Engine engine) {
+        this.engine = engine;
     }
 
     public void setCurrFuel(double currFuel) {
@@ -59,4 +69,30 @@ public class Car {
         }
         this.currFuel += size;
     }
+}
+
+class Engine {
+    private int serial;
+    private int size;
+    private String name;
+
+    public Engine() {
+    }
+
+    public Engine(int serial, int size, String name) {
+        this.serial = serial;
+        this.size = size;
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Engine{" +
+                "serial=" + serial +
+                ", size=" + size +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+
 }
