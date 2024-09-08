@@ -3,16 +3,16 @@ package oop3;
 public class Car {
     private static final int BOOST_THRESHOLD = 100;
     private static final double BOOST_MULTIPLIER = 1.5; // 부스터 사용 시 속도 증가율 (50% 증가)
-    private int serial;
-    private String name;
-    private String color;
-    private int maxSpeed;
-    private boolean isRunning;
-    private int boostCnt;
-    private int gage;
-    private boolean isBoosting; // 부스터 사용 여부
+    protected int serial;
+    protected String name;
+    protected String color;
+    protected int maxSpeed;
+    protected boolean isRunning;
+    protected int boostCnt;
+    protected int gage;
+    protected boolean isBoosting; // 부스터 사용 여부
 
-    private Engine engine;
+    protected Engine engine;
 
     public Car(int serial, String name, String color, int maxSpeed) {
         if (maxSpeed <= 0) throw new IllegalArgumentException("최대 속도는 0보다 커야 합니다.");
@@ -28,7 +28,7 @@ public class Car {
         this.engine = new Engine(123, "goatEngine", "Legend");
     }
 
-    public void drive(double distance, double speed) {
+    public  void drive(double distance, double speed) {
         if (!isRunning) {
             System.out.println("▶ 차량이 아직 정지 상태입니다. 엔진을 가동합니다.");
             engine.start();
