@@ -1,6 +1,6 @@
 package ctest;
 
-public class Lv1_2_0910 {
+public class Lv2_1_0910 {
     public int solution(String s) {
         int answer = 0;
         String copy = s;
@@ -66,7 +66,7 @@ public class Lv1_2_0910 {
     }
 
     public static void main(String[] args) {
-        Lv1_2_0910 solution = new Lv1_2_0910();
+        Lv2_1_0910 solution = new Lv2_1_0910();
         System.out.println("result :" + solution.solution("[](){}")); // 3
         System.out.println("result :" + solution.solution("}]()[{")); // 2
         System.out.println("result :" + solution.solution("[)(]"));   // 0
