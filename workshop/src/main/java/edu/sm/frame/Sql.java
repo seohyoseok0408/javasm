@@ -13,4 +13,12 @@ public class Sql {
     public static String deleteProduct = "DELETE FROM product WHERE id = ?";
     public static String updateProduct =
             "UPDATE product SET name = ?, price = ? WHERE id = ?";
+
+
+    public static String insertCart = "INSERT INTO Cart (cId, pId, count) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE count = count + ?";
+    public static String updateCart = "UPDATE Cart SET count = ? WHERE id = ?";
+    public static String deleteCart = "DELETE FROM Cart WHERE id = ?";
+    public static String selectOneCart = "SELECT * FROM Cart WHERE id = ?";
+    public static String selectCart = "SELECT * FROM Cart";
+    public static String selectByUserCart = "SELECT * FROM Cart WHERE cId = ?";
 }

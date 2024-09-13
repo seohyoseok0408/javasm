@@ -13,5 +13,4 @@ public interface Dao<K, V> {
     V select(K k, Connection con) throws Exception;
     List<V> select(Connection con) throws Exception;
 
-    // default 함수로 다른 검색 기능도 구현할 수 있을 것이다. (searchByName)
 }
