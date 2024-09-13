@@ -1,17 +1,17 @@
 package edu.sm.service;
 
+
 import edu.sm.dao.CustDao;
 import edu.sm.dto.Cust;
-import edu.sm.exception.DuplicatedIdException;
+import edu.sm.exception.DuplicatedEmailException;
 import edu.sm.frame.ConnectionPool;
-import edu.sm.frame.Dao;
 import edu.sm.frame.MService;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public class CustService implements MService<String, Cust> {
+public class CustService implements MService<Integer, Cust> {
     // Service에 Connection을 만들어야 한다.
 
     CustDao dao;
@@ -27,7 +27,7 @@ public class CustService implements MService<String, Cust> {
     }
 
     @Override
-    public Cust add(Cust cust) throws  Exception {
+    public Cust add(Cust cust) throws Exception {
         Connection con = cp.getConnection();
         // insert시 문제가 일어날수도있단걸 생각해야함(ex,ID중복). 만약 오류나면 Exception으로만 떤지게되고 그아래는 진행X.
         // 그래서 try/catch를 해야한다.
@@ -37,12 +37,12 @@ public class CustService implements MService<String, Cust> {
 //            dao.insert(cust, con);
             con.commit(); // 위 두 문장이 제대로 실행되면 commit해서 같이 들어감. 근데 2번째가 에러나서 catch로 가면 커밋을 안한거고, catch에서 롤백해야함
             System.out.println("Send SMS to: " + cust.getId());
-        } catch (DuplicatedIdException e) {
+        } catch (DuplicatedEmailException e) {
             con.rollback();
             throw e;
-        }
-        catch (Exception e) {
-            throw e; // 예외 발생 시 예외를 이것을 호출한 애플리케이션쪽으로 떤지게되고 끝남. 즉, return은 실행 안됨 (정상임)
+        } catch (Exception e) {
+            con.rollback();
+            throw e;
         } finally {
             cp.releaseConnection(con);
         }
@@ -64,12 +64,12 @@ public class CustService implements MService<String, Cust> {
     }
 
     @Override
-    public Boolean remove(String s) throws Exception {
+    public Boolean remove(Integer i) throws Exception {
         Connection conn = cp.getConnection();
         Boolean result = false;
         try {
-            result = dao.delete(s, conn);
-            System.out.println("삭제완료 id : " + s);
+            result = dao.delete(i, conn);
+            System.out.println("삭제완료 id : " + i);
         } catch (Exception e) {
             throw e;
         } finally {
@@ -79,11 +79,11 @@ public class CustService implements MService<String, Cust> {
     }
 
     @Override
-    public Cust get(String s) throws Exception {
+    public Cust get(Integer i) throws Exception {
         Connection conn = cp.getConnection();
         Cust cust = null;
         try {
-            cust = dao.select(s, conn);
+            cust = dao.select(i, conn);
         } catch (Exception e) {
             throw e;
         } finally {
@@ -105,4 +105,6 @@ public class CustService implements MService<String, Cust> {
         }
         return custs;
     }
+
+//    public Boolean Login
 }

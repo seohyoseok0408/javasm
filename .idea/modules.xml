@@ -19,6 +19,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/day09-jdbc02.main.iml" filepath="$PROJECT_DIR$/.idea/modules/day09-jdbc02.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/day09-jdbc02.test.iml" filepath="$PROJECT_DIR$/.idea/modules/day09-jdbc02.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/javasm.iml" filepath="$PROJECT_DIR$/javasm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/workshop.iml" filepath="$PROJECT_DIR$/workshop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/workshop.main.iml" filepath="$PROJECT_DIR$/.idea/modules/workshop.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/workshop.test.iml" filepath="$PROJECT_DIR$/.idea/modules/workshop.test.iml" />
     </modules>
   </component>
 </project>
