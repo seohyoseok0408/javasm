@@ -148,5 +148,32 @@ public class CustDao implements Dao<Integer, Cust> {
         }
         return custs;
     }
+    // 이메일로 사용자 조회하는 메서드
+    public Cust selectByEmail(String email, Connection con) throws Exception {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Cust cust = null;
+        try {
+            ps = con.prepareStatement("SELECT * FROM Customer WHERE email = ?");
+            ps.setString(1, email);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                cust = new Cust(
+                        rs.getInt("id"),
+                        rs.getString("email"),
+                        rs.getString("pwd"),
+                        rs.getString("name"),
+                        rs.getString("address"),
+                        rs.getDate("signup_date"),
+                        rs.getString("phone"),
+                        rs.getDate("birthdate")
+                );
+            }
+        } finally {
+            if (ps != null) ps.close();
+            if (rs != null) rs.close();
+        }
+        return cust;
+    }
 
 }

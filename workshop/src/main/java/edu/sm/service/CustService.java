@@ -36,7 +36,6 @@ public class CustService implements MService<Integer, Cust> {
             dao.insert(cust, con);
 //            dao.insert(cust, con);
             con.commit(); // 위 두 문장이 제대로 실행되면 commit해서 같이 들어감. 근데 2번째가 에러나서 catch로 가면 커밋을 안한거고, catch에서 롤백해야함
-            System.out.println("Send SMS to: " + cust.getId());
         } catch (DuplicatedEmailException e) {
             con.rollback();
             throw e;
@@ -106,5 +105,25 @@ public class CustService implements MService<Integer, Cust> {
         return custs;
     }
 
-//    public Boolean Login
+    // 로그인 함수: 이메일과 비밀번호를 체크하여 사용자를 반환
+    public Cust login(String email, String pwd) throws Exception {
+        Connection con = cp.getConnection();
+        Cust cust = null;
+        try {
+            // 이메일로 사용자 조회
+            cust = dao.selectByEmail(email, con);
+            // 사용자가 존재하고 비밀번호가 맞으면 로그인 성공
+            if (cust != null && cust.getPwd().equals(pwd)) {
+                System.out.println("로그인 성공: " + cust.getName());
+                return cust;
+            } else {
+                System.out.println("로그인 실패: 이메일 또는 비밀번호가 잘못되었습니다.");
+                return null; // 로그인 실패
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            cp.releaseConnection(con);
+        }
+    }
 }
